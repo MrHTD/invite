@@ -4,370 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light"> 
+    
     <title>Wedding Invitation</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap"
-        rel="stylesheet">
-
-    <style>
-        :root {
-            --primary-red: #e83d5e;
-            --soft-pink: #fadddd;
-            --gold: #c7a86b;
-            --text-dark: #2c2c2c;
-            --card-bg: rgba(255, 255, 255, 0.95);
-            --center-flower-img: url('https://static.vecteezy.com/system/resources/thumbnails/057/728/575/small/red-roses-and-ribbon-banner-design-element-png.png');
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            /* Full Screen Background */
-            background-image: url('images/bg.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            font-family: 'Montserrat', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-            animation: bg-breathe 30s infinite alternate;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.4);
-            z-index: -1;
-        }
-
-        @keyframes bg-breathe {
-            0% {
-                background-size: 100%;
-            }
-
-            100% {
-                background-size: 110%;
-            }
-        }
-
-        .card {
-            position: relative;
-            background-color: var(--card-bg);
-            width: 100%;
-            max-width: 630px;
-            min-height: 850px;
-            box-shadow: 0 10px 90px #d02729;
-            overflow: hidden;
-            text-align: center;
-            color: var(--text-dark);
-            border-radius: 8px;
-            border: 1px solid #eaddc5;
-            transition: all 0.3s ease;
-        }
-
-        /* --- NEW: CARD BACKGROUND IMAGE (WATERMARK) --- */
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-
-            /* IMAGE URL: I used a subtle floral sketch. Replace this URL with yours if you want. */
-            background-image: url('https://template.canva.com/EAGD4XKFrp4/1/0/1131w-K4N-pEdITXY.jpg');
-
-            background-size: cover;
-            background-position: center;
-
-            /* Controls transparency (0.1 = very light, 1 = full visibility) */
-            opacity: 50;
-
-            z-index: 0;
-            /* Keeps it behind text */
-            mix-blend-mode: multiply;
-            /* Blends nicely */
-        }
-
-        /* --- Rising Flowers Animation --- */
-        .rising-flowers {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 100%;
-            height: 400px;
-            background-image: var(--center-flower-img);
-            background-size: contain;
-            background-position: bottom center;
-            background-repeat: no-repeat;
-            z-index: 3;
-            opacity: 0.9;
-            transform: translateX(-50%) translateY(100%);
-            animation: riseUp 4s ease-out forwards;
-            animation-delay: 1s;
-        }
-
-        @keyframes riseUp {
-            0% {
-                transform: translateX(-50%) translateY(100%);
-            }
-
-            100% {
-                transform: translateX(-50%) translateY(37%);
-            }
-        }
-
-        /* --- Watercolor Blobs --- */
-        .watercolor-blob {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(70px);
-            z-index: 0;
-            opacity: 0.3;
-            animation: breathe 8s infinite ease-in-out;
-        }
-
-        .blob-1 {
-            top: 10%;
-            right: -20%;
-            width: 350px;
-            height: 350px;
-            background: var(--soft-pink);
-        }
-
-        .blob-2 {
-            bottom: 30%;
-            left: -20%;
-            width: 400px;
-            height: 400px;
-            background: #eccdc2;
-            animation-delay: -4s;
-        }
-
-        /* --- Content Styling --- */
-        .content {
-            position: relative;
-            z-index: 10;
-            /* Ensures text sits on TOP of the background image */
-            padding: 180px 30px 150px 30px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            height: 100%;
-            justify-content: flex-start;
-        }
-
-        h1.names {
-            font-family: 'Great Vibes', cursive;
-            font-size: 4rem;
-            color: var(--primary-red);
-            line-height: 1;
-            margin: 15px 0;
-        }
-
-        h1.names span.amp {
-            font-size: 1.5rem;
-            display: block;
-            color: var(--gold);
-            margin: 10px 0;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-        }
-
-        .small-caps {
-            font-size: 1rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--gold);
-            font-weight: 600;
-        }
-
-        .invite-text {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #c7a86b;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            font-weight: 600;
-        }
-
-        .location-text {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #666;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            font-weight: 600;
-        }
-
-        .divider {
-            height: 1px;
-            width: 120px;
-            background: var(--gold);
-            margin: 25px auto;
-            opacity: 0.6;
-        }
-
-        .date-block {
-            margin: 15px 0;
-        }
-
-        .date {
-            font-weight: 700;
-            font-size: 1.2rem;
-            text-transform: uppercase;
-            color: var(--primary-red);
-            letter-spacing: 1px;
-        }
-
-        @keyframes breathe {
-
-            0%,
-            100% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.08);
-            }
-        }
-
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        #petals {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 5;
-        }
-
-        .firefly-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
-            overflow: hidden;
-        }
-
-        .firefly {
-            position: absolute;
-            /* Using a pink flower icon instead of a glowing dot */
-            background-image: url('https://png.pngtree.com/png-vector/20240130/ourmid/pngtree-romantic-light-pink-rose-flower-ai-generated-png-image_11568979.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            opacity: 0;
-            animation: floatUp ease-in infinite;
-        }
-
-        @keyframes floatUp {
-            0% {
-                transform: translateY(0) translateX(0);
-                opacity: 0;
-            }
-
-            10% {
-                opacity: 1;
-            }
-
-            90% {
-                opacity: 1;
-            }
-
-            100% {
-                transform: translateY(-100vh) translateX(20px);
-                opacity: 0;
-            }
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .card {
-                max-width: 90%;
-                padding-bottom: 50px;
-            }
-
-            .content {
-                padding: 120px 20px 100px 20px;
-            }
-
-            h1.names {
-                font-size: 3rem;
-            }
-
-            h1.names span.amp {
-                font-size: 1.8rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .card {
-                max-width: 95%;
-                margin: 10px auto;
-            }
-
-            .content {
-                padding: 80px 15px 60px 15px;
-            }
-
-            h1.names {
-                font-size: 2.3rem;
-            }
-
-            .invite-text {
-                font-size: 0.9rem;
-            }
-
-            .date {
-                font-size: 1rem;
-            }
-
-            @keyframes riseUp {
-                0% {
-                    transform: translateX(-50%) translateY(100%);
-                }
-
-                100% {
-                    transform: translateX(-50%) translateY(20%);
-                }
-            }
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="./style.css" rel="stylesheet">
 </head>
 
 <body>
     <div class="firefly-container" id="fireflies"></div>
     <div class="card">
         <canvas id="petals"></canvas>
-        <!-- <div class="rising-flowers"></div> -->
         <div class="watercolor-blob blob-1"></div>
         <div class="watercolor-blob blob-2"></div>
 
@@ -376,7 +26,7 @@
                 <p class="small-caps">Together with their families</p>
             </div>
             <div class="fade-in" style="transition-delay: 0.4s;">
-                <h1 class="names">Muhammad Waliullah <span class="amp">WITH</span>Laiba Baig </h1>
+                <h1 class="names">Muhammad Waliullah <span class="amp">WITH</span> Laiba Baig</h1>
             </div>
             <div class="fade-in" style="transition-delay: 0.6s;">
                 <p class="invite-text">Invite you to celebrate their marriage</p>
@@ -435,26 +85,18 @@
 
         function createFireflies() {
             const container = document.getElementById('fireflies');
-            // Reduced count slightly so it doesn't look too cluttered with flowers
-            for (let i = 0; i < 35; i++) {
+            for (let i = 0; i < 40; i++) {
                 const div = document.createElement('div');
                 div.classList.add('firefly');
                 div.style.left = Math.random() * 100 + '%';
                 div.style.top = Math.random() * 100 + '%';
-
-                // Increased size so the flower image is visible (15px to 28px)
                 const size = Math.random() * 60 + 15;
-                div.style.width = size + 'px';
-                div.style.height = size + 'px';
-
-                // Random drift speeds
+                div.style.width = size + 'px'; div.style.height = size + 'px';
                 div.style.animationDuration = (Math.random() * 15 + 10) + 's';
                 div.style.animationDelay = Math.random() * 5 + 's';
-
                 container.appendChild(div);
             }
         }
-
         createFireflies();
 
         function init() {
