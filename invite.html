@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Invitation</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-red: #d02729;
+            --soft-pink: #fadddd;
+            --gold: #c7a86b;
+            --text-dark: #2c2c2c;
+            --card-bg: rgba(255, 255, 255, 0.97);
+            /* A new transparent PNG for the center animation */
+            --center-flower-img: url('https://static.vecteezy.com/system/resources/thumbnails/057/728/575/small/red-roses-and-ribbon-banner-design-element-png.png');
+            animation: bg-breathe 30s infinite alternate;
+        }
+
+        @keyframes bg-breathe {
+            0% {
+                background-size: 100%;
+            }
+
+            100% {
+                background-size: 110%;
+            }
+
+            /* Zooms in slightly */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-image: url('https://img.freepik.com/free-photo/rose-day-celebration-illustrated_23-2151903949.jpg?t=st=1764155951~exp=1764159551~hmac=6693ba2bfe9a6f0c95f7c068c5eddf79353e8d1294c213fb1753a60f6b547dd4&w=2000');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: -1;
+        }
+
+        .card {
+            position: relative;
+            background-color: var(--card-bg);
+            width: 100%;
+            max-width: 630px;
+            min-height: 850px;
+            box-shadow: 0 10px 90px #d02729;
+            overflow: hidden;
+            text-align: center;
+            color: var(--text-dark);
+            border-radius: 8px;
+            border: 1px solid #eaddc5;
+        }
+
+        /* --- UPDATED CSS --- */
+
+        .rising-flowers {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 100%;
+            height: 400px;
+            background-image: var(--center-flower-img);
+            background-size: contain;
+            background-position: bottom center;
+            background-repeat: no-repeat;
+            z-index: 3;
+            opacity: 0.9;
+
+            /* START STATE: Hidden at bottom */
+            transform: translateX(-50%) translateY(100%);
+
+            /* ANIMATION: Run for 4 seconds, Ease Out, and STOP at the end (forwards) */
+            animation: riseUp 4s ease-out forwards;
+
+            /* Optional: Add a delay so it starts after the text appears */
+            animation-delay: 1s;
+        }
+
+        @keyframes riseUp {
+            0% {
+                /* Start hidden */
+                transform: translateX(-50%) translateY(100%);
+            }
+
+            100% {
+                /* End visible (Adjust 70% to change height) */
+                transform: translateX(-50%) translateY(37%);
+            }
+        }
+
+        /* --- Watercolor Blobs --- */
+        .watercolor-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(70px);
+            z-index: 0;
+            opacity: 0.3;
+            animation: breathe 8s infinite ease-in-out;
+        }
+
+        .blob-1 {
+            top: 10%;
+            right: -20%;
+            width: 350px;
+            height: 350px;
+            background: var(--soft-pink);
+        }
+
+        .blob-2 {
+            bottom: 30%;
+            left: -20%;
+            width: 400px;
+            height: 400px;
+            background: #eccdc2;
+            animation-delay: -4s;
+        }
+
+        /* --- Content Styling --- */
+        .content {
+            position: relative;
+            z-index: 10;
+            /* Increased top padding slightly to push text up a bit */
+            padding: 180px 30px 150px 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            height: 100%;
+            justify-content: flex-start;
+            /* Align to top instead of center */
+        }
+
+        h1.names {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4rem;
+            color: var(--primary-red);
+            line-height: 1;
+            margin: 15px 0;
+        }
+
+        h1.names span.amp {
+            font-size: 2.2rem;
+            display: block;
+            color: var(--gold);
+            margin: 10px 0;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .small-caps {
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .invite-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+            letter-spacing: 0.5px;
+        }
+
+        .divider {
+            height: 1px;
+            width: 120px;
+            background: var(--gold);
+            margin: 25px auto;
+            opacity: 0.6;
+        }
+
+        .date-block {
+            margin: 15px 0;
+        }
+
+        .date {
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            color: var(--primary-red);
+            letter-spacing: 1px;
+        }
+
+        /* Animations */
+        @keyframes breathe {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.08);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        #petals {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        /* --- Firefly / Fairy Dust Effects --- */
+        .firefly-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            /* Above background image, below the card */
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .firefly {
+            position: absolute;
+            border-radius: 50%;
+            background: #ffc2cd;
+            /* Soft Pink */
+            box-shadow: 0 0 10px 2px rgba(255, 194, 205, 0.6);
+            /* Pink Glow */
+            /* Glow effect */
+            opacity: 0;
+            animation: floatUp ease-in infinite;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+                /* Fade in */
+            }
+
+            90% {
+                opacity: 1;
+                /* Stay visible */
+            }
+
+            100% {
+                transform: translateY(-100vh) translateX(20px);
+                /* Move up screen */
+                opacity: 0;
+                /* Fade out */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="firefly-container" id="fireflies"></div>
+    <div class="card">
+        <canvas id="petals"></canvas>
+
+        <div class="rising-flowers"></div>
+
+        <div class="watercolor-blob blob-1"></div>
+        <div class="watercolor-blob blob-2"></div>
+
+        <div class="content">
+            <div class="fade-in" style="transition-delay: 0.2s;">
+                <p class="small-caps">Together with their families</p>
+            </div>
+
+            <div class="fade-in" style="transition-delay: 0.4s;">
+                <h1 class="names">Groom Name <span class="amp">&</span> Bride Name</h1>
+            </div>
+
+            <div class="fade-in" style="transition-delay: 0.6s;">
+                <p class="invite-text">Invite you to celebrate their marriage</p>
+            </div>
+
+            <div class="divider fade-in" style="transition-delay: 0.8s;"></div>
+
+            <div class="date-block fade-in" style="transition-delay: 1s;">
+                <p class="date">Saturday, June 7th, 2026</p>
+                <p class="small-caps" style="margin-top:8px; color: #666;">at 8:00 PM</p>
+            </div>
+
+            <div class="fade-in" style="transition-delay: 1.2s;">
+                <p class="invite-text" style="font-weight: 600; color: var(--primary-red);">THE GRAND BALLROOM</p>
+                <p class="invite-text">Karachi</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.onload = () => {
+            document.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
+        };
+
+        // Petal Animation (Updated colors)
+        const canvas = document.getElementById('petals');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let petals = [];
+
+        function resize() {
+            width = canvas.width = canvas.parentElement.offsetWidth;
+            height = canvas.height = canvas.parentElement.offsetHeight;
+        }
+
+        class Petal {
+            constructor() { this.reset(); }
+            reset() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * -height;
+                this.size = Math.random() * 20 + 2;
+                this.speed = Math.random() * 0.8 + 0.2; /* Slowed down slightly */
+                this.opacity = Math.random() * 0.4 + 0.2;
+                this.color = Math.random() > 0.6 ? '220, 20, 60' : (Math.random() > 0.5 ? '255, 182, 193' : '255, 255, 255');
+                this.rotation = Math.random() * Math.PI * 2;
+                this.rotSpeed = (Math.random() - 0.5) * 0.02;
+            }
+            update() {
+                this.y += this.speed;
+                this.rotation += this.rotSpeed;
+                this.x += Math.sin(this.y * 0.005 + this.rotation) * 0.5;
+                if (this.y > height) this.reset();
+            }
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.rotation);
+                ctx.fillStyle = `rgba(${this.color}, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.quadraticCurveTo(this.size / 2, -this.size, this.size, 0);
+                ctx.quadraticCurveTo(this.size / 2, this.size / 2, 0, 0);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        /* Add this to the bottom of your script */
+
+        function createFireflies() {
+            const container = document.getElementById('fireflies');
+            const fireflyCount = 50; // How many particles
+
+            for (let i = 0; i < fireflyCount; i++) {
+                const div = document.createElement('div');
+                div.classList.add('firefly');
+
+                // Random Position
+                div.style.left = Math.random() * 100 + '%';
+                div.style.top = Math.random() * 100 + '%';
+
+                // Random Size (Small and varying)
+                const size = Math.random() * 4 + 2; // 2px to 6px
+                div.style.width = size + 'px';
+                div.style.height = size + 'px';
+
+                // Random Speed (Slow drift)
+                const duration = Math.random() * 10 + 10; // 10s to 20s
+                div.style.animationDuration = duration + 's';
+
+                // Random Delay so they don't all start at once
+                div.style.animationDelay = Math.random() * 5 + 's';
+
+                container.appendChild(div);
+            }
+        }
+
+        // Run it
+        createFireflies();
+
+        function init() {
+            resize();
+            // Reduced petal count slightly so it's not too busy with the new animation
+            for (let i = 0; i < 30; i++) petals.push(new Petal());
+            animate();
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            petals.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', resize);
+        init();
+    </script>
+</body>
+
+</html>
