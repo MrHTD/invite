@@ -13,11 +13,11 @@
 
     <style>
         :root {
-            --primary-red: #d02729;
+            --primary-red: #e83d5e;
             --soft-pink: #fadddd;
             --gold: #c7a86b;
             --text-dark: #2c2c2c;
-            --card-bg: rgba(255, 255, 255, 0.97);
+            --card-bg: rgba(255, 255, 255, 0.95);
             --center-flower-img: url('https://static.vecteezy.com/system/resources/thumbnails/057/728/575/small/red-roses-and-ribbon-banner-design-element-png.png');
         }
 
@@ -28,8 +28,8 @@
         }
 
         body {
-            /* Using the background image you provided previously */
-            background-image: url('https://img.freepik.com/free-photo/rose-day-celebration-illustrated_23-2151903949.jpg?t=st=1764155951~exp=1764159551~hmac=6693ba2bfe9a6f0c95f7c068c5eddf79353e8d1294c213fb1753a60f6b547dd4&w=2000');
+            /* Full Screen Background */
+            background-image: url('images/bg.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -39,7 +39,6 @@
             align-items: center;
             min-height: 100vh;
             padding: 20px;
-            /* Background Zoom Animation */
             animation: bg-breathe 30s infinite alternate;
         }
 
@@ -55,8 +54,13 @@
         }
 
         @keyframes bg-breathe {
-            0% { background-size: 100%; }
-            100% { background-size: 110%; }
+            0% {
+                background-size: 100%;
+            }
+
+            100% {
+                background-size: 110%;
+            }
         }
 
         .card {
@@ -72,6 +76,30 @@
             border-radius: 8px;
             border: 1px solid #eaddc5;
             transition: all 0.3s ease;
+        }
+
+        /* --- NEW: CARD BACKGROUND IMAGE (WATERMARK) --- */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+
+            /* IMAGE URL: I used a subtle floral sketch. Replace this URL with yours if you want. */
+            background-image: url('https://template.canva.com/EAGD4XKFrp4/1/0/1131w-K4N-pEdITXY.jpg');
+
+            background-size: cover;
+            background-position: center;
+
+            /* Controls transparency (0.1 = very light, 1 = full visibility) */
+            opacity: 50;
+
+            z-index: 0;
+            /* Keeps it behind text */
+            mix-blend-mode: multiply;
+            /* Blends nicely */
         }
 
         /* --- Rising Flowers Animation --- */
@@ -93,8 +121,13 @@
         }
 
         @keyframes riseUp {
-            0% { transform: translateX(-50%) translateY(100%); }
-            100% { transform: translateX(-50%) translateY(37%); }
+            0% {
+                transform: translateX(-50%) translateY(100%);
+            }
+
+            100% {
+                transform: translateX(-50%) translateY(37%);
+            }
         }
 
         /* --- Watercolor Blobs --- */
@@ -108,12 +141,18 @@
         }
 
         .blob-1 {
-            top: 10%; right: -20%; width: 350px; height: 350px;
+            top: 10%;
+            right: -20%;
+            width: 350px;
+            height: 350px;
             background: var(--soft-pink);
         }
 
         .blob-2 {
-            bottom: 30%; left: -20%; width: 400px; height: 400px;
+            bottom: 30%;
+            left: -20%;
+            width: 400px;
+            height: 400px;
             background: #eccdc2;
             animation-delay: -4s;
         }
@@ -122,6 +161,7 @@
         .content {
             position: relative;
             z-index: 10;
+            /* Ensures text sits on TOP of the background image */
             padding: 180px 30px 150px 30px;
             display: flex;
             flex-direction: column;
@@ -147,7 +187,7 @@
         }
 
         .small-caps {
-            font-size: 0.8rem;
+            font-size: 1rem;
             letter-spacing: 3px;
             text-transform: uppercase;
             color: var(--gold);
@@ -157,7 +197,16 @@
         .invite-text {
             font-size: 1.1rem;
             line-height: 1.8;
-            color: #555;
+            color: #c7a86b;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .location-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #666;
             letter-spacing: 0.5px;
             text-transform: uppercase;
             font-weight: 600;
@@ -171,7 +220,9 @@
             opacity: 0.6;
         }
 
-        .date-block { margin: 15px 0; }
+        .date-block {
+            margin: 15px 0;
+        }
 
         .date {
             font-weight: 700;
@@ -181,10 +232,16 @@
             letter-spacing: 1px;
         }
 
-        /* --- Animations --- */
         @keyframes breathe {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.08); }
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.08);
+            }
         }
 
         .fade-in {
@@ -193,86 +250,113 @@
             transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
-        .visible { opacity: 1; transform: translateY(0); }
-
-        #petals {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none; z-index: 5;
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        /* --- Firefly Effects --- */
+        #petals {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+        }
+
         .firefly-container {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 1; pointer-events: none; overflow: hidden;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            overflow: hidden;
         }
 
         .firefly {
-            position: absolute; border-radius: 50%;
-            background: #ffc2cd; box-shadow: 0 0 10px 2px rgba(255, 194, 205, 0.6);
-            opacity: 0; animation: floatUp ease-in infinite;
+            position: absolute;
+            /* Using a pink flower icon instead of a glowing dot */
+            background-image: url('https://png.pngtree.com/png-vector/20240130/ourmid/pngtree-romantic-light-pink-rose-flower-ai-generated-png-image_11568979.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0;
+            animation: floatUp ease-in infinite;
         }
 
         @keyframes floatUp {
-            0% { transform: translateY(0) translateX(0); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-100vh) translateX(20px); opacity: 0; }
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-100vh) translateX(20px);
+                opacity: 0;
+            }
         }
 
-        /* =========================================
-           RESPONSIVE DESIGN (MEDIA QUERIES)
-           ========================================= */
-        
-        /* Tablet & Small Laptops (Max Width 768px) */
+        /* Responsive */
         @media (max-width: 768px) {
             .card {
-                max-width: 90%; /* Let the card shrink */
-                min-height: auto; /* Let content dictate height */
+                max-width: 90%;
                 padding-bottom: 50px;
             }
+
             .content {
-                padding: 120px 20px 100px 20px; /* Reduce massive padding */
+                padding: 120px 20px 100px 20px;
             }
+
             h1.names {
-                font-size: 3rem; /* Smaller names */
+                font-size: 3rem;
             }
+
             h1.names span.amp {
                 font-size: 1.8rem;
             }
-            .rising-flowers {
-                height: 300px; /* Smaller flowers */
-            }
-            .blob-1, .blob-2 {
-                width: 250px; height: 250px; /* Smaller blobs */
-            }
         }
 
-        /* Mobile Phones (Max Width 480px) */
         @media (max-width: 480px) {
             .card {
-                max-width: 95%; /* Use almost full screen width */
+                max-width: 95%;
                 margin: 10px auto;
             }
+
             .content {
-                padding: 80px 15px 60px 15px; /* Compact padding */
+                padding: 80px 15px 60px 15px;
             }
+
             h1.names {
-                font-size: 2.3rem; /* Mobile friendly size */
-                line-height: 1.2;
+                font-size: 2.3rem;
             }
+
             .invite-text {
                 font-size: 0.9rem;
             }
+
             .date {
                 font-size: 1rem;
             }
-            .rising-flowers {
-                height: 220px; /* Even smaller flowers for mobile */
-            }
-            /* Adjust animation stop point for mobile */
+
             @keyframes riseUp {
-                0% { transform: translateX(-50%) translateY(100%); }
-                100% { transform: translateX(-50%) translateY(20%); } /* Rise higher on mobile */
+                0% {
+                    transform: translateX(-50%) translateY(100%);
+                }
+
+                100% {
+                    transform: translateX(-50%) translateY(20%);
+                }
             }
         }
     </style>
@@ -282,9 +366,7 @@
     <div class="firefly-container" id="fireflies"></div>
     <div class="card">
         <canvas id="petals"></canvas>
-
-        <div class="rising-flowers"></div>
-
+        <!-- <div class="rising-flowers"></div> -->
         <div class="watercolor-blob blob-1"></div>
         <div class="watercolor-blob blob-2"></div>
 
@@ -292,35 +374,27 @@
             <div class="fade-in" style="transition-delay: 0.2s;">
                 <p class="small-caps">Together with their families</p>
             </div>
-
             <div class="fade-in" style="transition-delay: 0.4s;">
                 <h1 class="names">Groom Name <span class="amp">&</span> Bride Name</h1>
             </div>
-
             <div class="fade-in" style="transition-delay: 0.6s;">
                 <p class="invite-text">Invite you to celebrate their marriage</p>
             </div>
-
             <div class="divider fade-in" style="transition-delay: 0.8s;"></div>
-
             <div class="date-block fade-in" style="transition-delay: 1s;">
                 <p class="date">Saturday, June 7th, 2026</p>
                 <p class="small-caps" style="margin-top:8px; color: #666;">at 8:00 PM</p>
             </div>
-
             <div class="fade-in" style="transition-delay: 1.2s;">
                 <p class="invite-text" style="font-weight: 600; color: var(--primary-red);">THE GRAND BALLROOM</p>
-                <p class="invite-text">Karachi</p>
+                <p class="location-text">Karachi</p>
             </div>
         </div>
     </div>
 
     <script>
-        window.onload = () => {
-            document.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
-        };
+        window.onload = () => { document.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible')); };
 
-        // Petal Animation
         const canvas = document.getElementById('petals');
         const ctx = canvas.getContext('2d');
         let width, height;
@@ -336,8 +410,8 @@
             reset() {
                 this.x = Math.random() * width;
                 this.y = Math.random() * -height;
-                this.size = Math.random() * 15 + 2; // Adjusted size
-                this.speed = Math.random() * 0.8 + 0.2; 
+                this.size = Math.random() * 15 + 2;
+                this.speed = Math.random() * 0.8 + 0.2;
                 this.opacity = Math.random() * 0.4 + 0.2;
                 this.color = Math.random() > 0.6 ? '220, 20, 60' : (Math.random() > 0.5 ? '255, 182, 193' : '255, 255, 255');
                 this.rotation = Math.random() * Math.PI * 2;
@@ -350,35 +424,32 @@
                 if (this.y > height) this.reset();
             }
             draw() {
-                ctx.save();
-                ctx.translate(this.x, this.y);
-                ctx.rotate(this.rotation);
+                ctx.save(); ctx.translate(this.x, this.y); ctx.rotate(this.rotation);
                 ctx.fillStyle = `rgba(${this.color}, ${this.opacity})`;
                 ctx.beginPath();
-                ctx.moveTo(0, 0);
-                ctx.quadraticCurveTo(this.size / 2, -this.size, this.size, 0);
-                ctx.quadraticCurveTo(this.size / 2, this.size / 2, 0, 0);
-                ctx.fill();
-                ctx.restore();
+                ctx.moveTo(0, 0); ctx.quadraticCurveTo(this.size / 2, -this.size, this.size, 0); ctx.quadraticCurveTo(this.size / 2, this.size / 2, 0, 0);
+                ctx.fill(); ctx.restore();
             }
         }
 
-        // Firefly Logic
         function createFireflies() {
             const container = document.getElementById('fireflies');
-            const fireflyCount = 40; 
-
-            for (let i = 0; i < fireflyCount; i++) {
+            // Reduced count slightly so it doesn't look too cluttered with flowers
+            for (let i = 0; i < 35; i++) {
                 const div = document.createElement('div');
                 div.classList.add('firefly');
                 div.style.left = Math.random() * 100 + '%';
                 div.style.top = Math.random() * 100 + '%';
-                const size = Math.random() * 4 + 2; 
+
+                // Increased size so the flower image is visible (15px to 28px)
+                const size = Math.random() * 60 + 15;
                 div.style.width = size + 'px';
                 div.style.height = size + 'px';
-                const duration = Math.random() * 10 + 10; 
-                div.style.animationDuration = duration + 's';
+
+                // Random drift speeds
+                div.style.animationDuration = (Math.random() * 15 + 10) + 's';
                 div.style.animationDelay = Math.random() * 5 + 's';
+
                 container.appendChild(div);
             }
         }
@@ -390,18 +461,14 @@
             for (let i = 0; i < 30; i++) petals.push(new Petal());
             animate();
         }
-
         function animate() {
             ctx.clearRect(0, 0, width, height);
             petals.forEach(p => { p.update(); p.draw(); });
             requestAnimationFrame(animate);
         }
-
-        window.addEventListener('resize', () => {
-            resize();
-            // Optional: Reset petals on resize to prevent distortion
-        });
+        window.addEventListener('resize', resize);
         init();
     </script>
 </body>
+
 </html>
