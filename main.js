@@ -1,9 +1,18 @@
-// Define variables at the top, but DO NOT assign them yet
-let canvas, ctx;
+// Function to handle resizing
+function resize() {
+    // Check if canvas exists to avoid errors
+    if (!canvas) return;
+    width = canvas.width = canvas.parentElement.offsetWidth;
+    height = canvas.height = canvas.parentElement.offsetHeight;
+}
+
+// 1. Setup Canvas Variables
+const canvas = document.getElementById('petals');
+const ctx = canvas.getContext('2d');
 let width, height;
 let petals = [];
 
-// 1. Petal Class
+// 2. Petal Class
 class Petal {
     constructor() { this.reset(); }
     reset() {
@@ -23,7 +32,6 @@ class Petal {
         if (this.y > height) this.reset();
     }
     draw() {
-        if (!ctx) return; // Safety check
         ctx.save(); ctx.translate(this.x, this.y); ctx.rotate(this.rotation);
         ctx.fillStyle = `rgba(${this.color}, ${this.opacity})`;
         ctx.beginPath();
@@ -32,36 +40,14 @@ class Petal {
     }
 }
 
-// 2. Resize Function
-function resize() {
-    if (!canvas) return;
-    width = canvas.width = canvas.parentElement.offsetWidth;
-    height = canvas.height = canvas.parentElement.offsetHeight;
-}
+// 3. Fireflies Logic
+// Fix: We define the count but we must use it in the loop
+const isMobile = window.innerWidth < 768;
+const fireflyCount = isMobile ? 15 : 40;
 
-// 3. Animation Loop
-function animate() {
-    if (!ctx) return;
-
-    // Only animate if tab is visible to save battery
-    if (!document.hidden) {
-        ctx.clearRect(0, 0, width, height);
-        petals.forEach(p => {
-            p.update();
-            p.draw();
-        });
-    }
-    requestAnimationFrame(animate);
-}
-
-// 4. Fireflies Logic
 function createFireflies() {
     const container = document.getElementById('fireflies');
-    if (!container) return; // Safety check
-
-    const isMobile = window.innerWidth < 768;
-    const fireflyCount = isMobile ? 15 : 40;
-
+    // FIX: Use 'fireflyCount' variable, not the hardcoded number 40
     for (let i = 0; i < fireflyCount; i++) {
         const div = document.createElement('div');
         div.classList.add('firefly');
@@ -75,43 +61,45 @@ function createFireflies() {
     }
 }
 
-// 5. MASTER INITIALIZATION (Runs only when page is fully loaded)
+// 4. Animation Loop
+function animate() {
+    if (!document.hidden) {
+        ctx.clearRect(0, 0, width, height);
+        petals.forEach(p => {
+            p.update();
+            p.draw();
+        });
+    }
+    requestAnimationFrame(animate);
+}
+
+// 5. Initialize Everything ONCE
+function init() {
+    resize();
+    for (let i = 0; i < 30; i++) petals.push(new Petal());
+    animate();
+}
+
+window.addEventListener('resize', resize);
+
+// 6. Master Window Load
 window.onload = () => {
-    // A. Start Text Animations
+    // Start animations
     document.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
 
-    // B. Setup Canvas (NOW IT IS SAFE)
-    canvas = document.getElementById('petals');
-    if (canvas) {
-        ctx = canvas.getContext('2d');
-        resize();
-
-        // Create Petals
-        petals = [];
-        for (let i = 0; i < 30; i++) petals.push(new Petal());
-
-        // Start Animation Loop
-        animate();
-    }
-
-    // C. Setup Window Resize Listener
-    window.addEventListener('resize', resize);
-
-    // D. Start Fireflies
+    // CALL THESE ONLY HERE (Removed the duplicate calls at the bottom)
+    init();
     createFireflies();
 
+    // Auto-hide Welcome Screen
     setTimeout(() => {
-        // 1. Hide Welcome Screen
         const screen = document.getElementById('welcome-screen');
         if (screen) {
             screen.classList.add('hidden-overlay');
         }
-
-        // 2. TRIGGER THE NAME ANIMATION HERE
         const names = document.querySelector('h1.names');
         if (names) {
             names.classList.add('run-animation');
         }
-
-    }, 3000); // 3 seconds wait time
+    }, 3000);
 };
