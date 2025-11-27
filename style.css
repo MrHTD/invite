@@ -257,10 +257,10 @@
 
         .date {
             font-weight: 700;
-            font-size: 1.2rem;
+            font-size: clamp(0.8rem, 4.5vw, 1.1rem);
             text-transform: uppercase;
             color: var(--primary-red);
-            letter-spacing: 1px;
+            letter-spacing: clamp(0.5px, 1vw, 3px);
         }
 
         @keyframes breathe {
@@ -750,21 +750,20 @@
         /* --- VENUE LINK STYLING --- */
         .venue-link {
             display: inline-flex;
-            /* Aligns text and icon perfectly */
             align-items: center;
             gap: 6px;
+            font-size: clamp(0.8rem, 4.5vw, 1.1rem);
             /* Space between text and icon */
             font-weight: 600;
             color: var(--primary-red);
             text-decoration: none;
-            letter-spacing: 0.5px;
+            letter-spacing: clamp(0.5px, 1vw, 3px);
             margin-bottom: 5px;
             position: relative;
             cursor: pointer;
             transition: color 0.3s ease, transform 0.2s ease;
             animation: bouncePin 0.6s infinite alternate;
 
-            font-size: clamp(0.8rem, 4.5vw, 1.1rem);
             /* RESPONSIVE LETTER SPACING */
             /* Spacing also needs to shrink on mobile, or it will break the line */
             letter-spacing: clamp(0.5px, 1vw, 3px);
