@@ -156,8 +156,35 @@
             font-family: 'Great Vibes', cursive;
             font-size: 3.5rem;
             color: var(--primary-red);
-            line-height: 1.1;
             margin: 15px 0;
+
+            /* FIX 1: Remove overflow:hidden so shadow isn't cut inside the box */
+            /* overflow: hidden;  <-- REMOVE THIS */
+
+            white-space: nowrap;
+            text-shadow: 0 15px 10px rgba(199, 168, 107, 0.4);
+
+            /* The Animation */
+            animation: inkFlow 3s cubic-bezier(0.7, 0, 0.3, 1) forwards;
+            animation-delay: 0.4s;
+
+            /* FIX 2: Start with negative values on Top/Bottom/Left to allow room for shadow */
+            /* The 100% on the RIGHT is what hides the text initially */
+            clip-path: inset(-20px 100% -50px -20px);
+        }
+
+        @keyframes inkFlow {
+            0% {
+                /* Hidden (masked from right) */
+                clip-path: inset(-20px 100% -50px -20px);
+                filter: blur(5px);
+            }
+
+            100% {
+                /* Fully Visible (Negative values reveal the shadow outside the text) */
+                clip-path: inset(-20px -20px -50px -20px);
+                filter: blur(0px);
+            }
         }
 
         h1.names span.amp {
@@ -170,7 +197,7 @@
         }
 
         .small-caps {
-            font-size: 1rem;
+            font-size: 1.1rem;
             letter-spacing: 3px;
             text-transform: uppercase;
             color: var(--gold);
@@ -494,7 +521,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: #fff;
+            background-color: #fdfbf7;
             /* Or use your paper texture color */
             z-index: 9999;
             /* On top of everything */
@@ -511,20 +538,51 @@
 
         .bismillah {
             font-family: 'Great Vibes', cursive;
-            /* Or an Arabic font if you have one */
-            font-size: 5rem;
             color: var(--gold);
             margin-bottom: 20px;
+
+            /* FORCE SINGLE LINE */
+            white-space: nowrap;
+            width: 100%;
+            text-align: center;
+
+            /* RESPONSIVE FONT SIZE */
+            /* This scales the text: Min 1.5rem | Preferred 8% of screen | Max 5rem */
+            font-size: clamp(2.5rem, 9vw, 5rem);
+            /* ANIMATION: Fades in and moves down slightly */
+            opacity: 0;
+            /* Start invisible */
+            animation: fadeDrop 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            animation-delay: 0.2s;
+            /* Wait 0.5s before starting */
         }
 
         .names-intro {
             font-family: 'Montserrat', sans-serif;
-            font-size: 1.5rem;
-            letter-spacing: 4px;
             text-transform: uppercase;
             margin-bottom: 40px;
             color: var(--primary-red);
             font-weight: 600;
+
+            /* FORCE SINGLE LINE */
+            white-space: nowrap;
+            width: 100%;
+            text-align: center;
+
+            /* RESPONSIVE FONT SIZE */
+            /* Min 0.7rem | Preferred 3.5% of screen | Max 1.5rem */
+            font-size: clamp(0.7rem, 3.1vw, 1.5rem);
+
+            /* RESPONSIVE LETTER SPACING */
+            /* Spacing also needs to shrink on mobile, or it will break the line */
+            letter-spacing: clamp(1px, 1vw, 4px);
+            /* ANIMATION: Fades in while letters spread out */
+            opacity: 0;
+            letter-spacing: 0px;
+            /* Start tight */
+            animation: cinematicReveal 2s ease forwards;
+            animation-delay: 0.2s;
+            /* Starts after Bismillah finishes */
         }
 
         .enter-btn {
@@ -538,11 +596,110 @@
             transition: 0.3s;
             display: inline-block;
             border-radius: 8px;
+            background-color: white;
+
+            /* The Animation */
+            animation: pulse-gold 2s infinite;
+            box-shadow: 0 0 0 0 rgba(199, 168, 107, 0.7);
+
+            /* --- RESPONSIVE SINGLE LINE FIXES --- */
+            white-space: nowrap;
+            /* Forces text to stay on one line */
+
+            /* Responsive Font: Min 0.7rem, Max 1rem */
+            font-size: clamp(0.7rem, 4vw, 1rem);
+
+            /* Responsive Padding: Vertical 12px, Horizontal scales (10px to 30px) */
+            padding: 12px clamp(10px, 5vw, 30px);
+
+            /* Responsive Letter Spacing: shrinks on mobile */
+            letter-spacing: clamp(1px, 1vw, 2px);
         }
 
         .enter-btn:hover {
             background: var(--gold);
             color: white;
+            animation: pulse-gold 2s infinite;
+            /* Stop pulsing when hovered */
+            transform: scale(1.05);
+            /* Slight grow effect */
+        }
+
+        /* Keyframes for the Pulse */
+        @keyframes pulse-gold {
+            0% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(199, 168, 107, 0.7);
+            }
+
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 10px rgba(199, 168, 107, 0);
+                /* Ring expands and fades transparent */
+            }
+
+            100% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(199, 168, 107, 0);
+            }
+        }
+
+        @keyframes fadeDrop {
+            0% {
+                opacity: 0;
+                transform: translateY(-30px);
+                /* Starts higher */
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes cinematicReveal {
+            0% {
+                opacity: 0;
+                letter-spacing: 0px;
+                filter: blur(5px);
+            }
+
+            100% {
+                opacity: 1;
+                /* Matches your clamp spacing logic */
+                letter-spacing: clamp(1px, 1vw, 4px);
+                filter: blur(0);
+            }
+        }
+
+        @keyframes slideUpBtn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Ensure Pulse stays consistent */
+        @keyframes pulse-white {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+            }
+
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 15px rgba(255, 255, 255, 0);
+            }
+
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+            }
         }
 
         /* Hide class to fade it out */
@@ -568,6 +725,7 @@
             position: relative;
             cursor: pointer;
             transition: color 0.3s ease, transform 0.2s ease;
+            animation: bouncePin 0.6s infinite alternate;
         }
 
         /* Hover Effect */
