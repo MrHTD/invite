@@ -486,3 +486,67 @@
                 }
             }
         }
+
+        /* --- WELCOME OVERLAY --- */
+        #welcome-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+            /* Or use your paper texture color */
+            z-index: 9999;
+            /* On top of everything */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 1s ease, visibility 1s ease;
+        }
+
+        .welcome-content {
+            text-align: center;
+            animation: fadeIn 2s ease;
+        }
+
+        .bismillah {
+            font-family: 'Great Vibes', cursive;
+            /* Or an Arabic font if you have one */
+            font-size: 5rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+        
+        .names-intro {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            color: var(--primary-red);
+            font-weight: 600;
+        }
+
+        .enter-btn {
+            padding: 12px 30px;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            display: inline-block;
+            border-radius: 8px;
+        }
+
+        .enter-btn:hover {
+            background: var(--gold);
+            color: white;
+        }
+
+        /* Hide class to fade it out */
+        .hidden-overlay {
+            opacity: 0;
+            visibility: hidden;
+        }
