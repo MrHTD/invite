@@ -425,3 +425,64 @@
                 }
             }
         }
+
+        /* =========================================
+   LAPTOP & SHORT SCREEN FIXES
+   ========================================= */
+
+        /* Target screens that are short (common laptops are 768px - 900px high) */
+        @media screen and (max-height: 900px) {
+
+            body {
+                /* Switch from center to flex-start so the top doesn't get cut off when scrolling */
+                align-items: flex-start;
+                padding-top: 40px;
+                padding-bottom: 40px;
+                height: auto;
+                /* Allow body to grow with scroll */
+            }
+
+            .card {
+                /* Remove the forced 850px height */
+                min-height: auto;
+                height: auto;
+                /* Let the card fit the content naturally */
+                max-width: 550px;
+            }
+
+            .content {
+                /* DRASTICALLY reduce the 180px top padding to fit short screens */
+                padding: 60px 30px 50px 30px;
+                gap: 8px;
+                /* Reduce gap between elements */
+            }
+
+            h1.names {
+                /* Scale down title slightly */
+                font-size: 3rem;
+                margin: 5px 0;
+            }
+
+            .watercolor-blob {
+                /* Shrink blobs so they don't dominate the smaller card space */
+                width: 250px;
+                height: 250px;
+            }
+
+            .divider {
+                margin: 15px auto;
+            }
+
+            /* Adjust the rising flower animation to sit lower */
+            /* If you have .rising-flowers defined in your HTML, this stops it covering text */
+            @keyframes riseUp {
+                0% {
+                    transform: translateX(-50%) translateY(100%);
+                }
+
+                100% {
+                    /* Lower the final position (was 37%, now 10%) */
+                    transform: translateX(-50%) translateY(10%);
+                }
+            }
+        }

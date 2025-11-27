@@ -4,13 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="color-scheme" content="light"> 
-    
+    <meta name="color-scheme" content="light">
+
     <title>Wedding Invitation</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap"
+        rel="stylesheet">
     <link href="./style.css" rel="stylesheet">
 </head>
 
@@ -83,6 +84,9 @@
             }
         }
 
+        const isMobile = window.innerWidth < 768;
+        const fireflyCount = isMobile ? 15 : 40;
+
         function createFireflies() {
             const container = document.getElementById('fireflies');
             for (let i = 0; i < 40; i++) {
@@ -105,10 +109,17 @@
             animate();
         }
         function animate() {
-            ctx.clearRect(0, 0, width, height);
-            petals.forEach(p => { p.update(); p.draw(); });
+            // Check if the user is looking at the tab
+            if (!document.hidden) {
+                ctx.clearRect(0, 0, width, height);
+                petals.forEach(p => {
+                    p.update();
+                    p.draw();
+                });
+            }
             requestAnimationFrame(animate);
         }
+
         window.addEventListener('resize', resize);
         init();
     </script>
