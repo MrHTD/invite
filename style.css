@@ -219,7 +219,7 @@
 
         .small-caps {
             font-size: clamp(0.8rem, 4.5vw, 1.1rem);
-            letter-spacing: 3px;
+            letter-spacing: clamp(0.5px, 1vw, 3px);
             text-transform: uppercase;
             color: var(--gold);
             font-weight: 600;
@@ -238,7 +238,7 @@
             font-size: clamp(0.8rem, 4.5vw, 1.1rem);
             line-height: 1.8;
             color: #666;
-            letter-spacing: 0.5px;
+            letter-spacing: clamp(0.5px, 1vw, 3px);
             text-transform: uppercase;
             font-weight: 600;
         }
