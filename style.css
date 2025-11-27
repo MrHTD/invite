@@ -413,15 +413,6 @@
                 line-height: 1.5;
             }
 
-            .date {
-                font-size: 1rem;
-            }
-
-            .small-caps {
-                font-size: 0.75rem;
-                letter-spacing: 2px;
-            }
-
             .watercolor-blob {
                 opacity: 0.2;
             }
