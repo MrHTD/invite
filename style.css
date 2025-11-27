@@ -16,21 +16,42 @@
         }
 
         body {
-            /* Full Screen Background */
-            background-image: url('images/bg.jpg');
-            background-size: cover;
-            background-position: center center;
-            background-attachment: fixed;
             font-family: 'Montserrat', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             padding: 20px;
+
+            /* REMOVED background image properties from here */
+            background-color: #000;
+            /* Fallback color */
+        }
+
+        /* ADD THIS NEW CLASS */
+        .bg-fixed-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+
+            background-image: url('images/bg.jpg');
+            background-size: cover;
+            background-position: center center;
+
+            z-index: -10;
+            /* Behind everything */
+            will-change: transform;
+            /* Hint for GPU acceleration */
+
+            /* Optional: Keep the breathing animation here */
             animation: bg-breathe 30s infinite alternate;
         }
 
+        /* Update your existing overlay to sit on top of the bg layer */
         body::before {
+            /* Only keep the darkness overlay */
             content: '';
             position: fixed;
             top: 0;
@@ -38,7 +59,8 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.4);
-            z-index: -1;
+            z-index: -5;
+            /* sits between bg-layer and content */
         }
 
         @keyframes bg-breathe {
@@ -154,22 +176,21 @@
 
         h1.names {
             font-family: 'Great Vibes', cursive;
-            font-size: 3.5rem;
+            font-size: clamp(1.8rem, 6vw, 3.5rem);
             color: var(--primary-red);
             margin: 15px 0;
-
+            letter-spacing: normal;
             /* FIX 1: Remove overflow:hidden so shadow isn't cut inside the box */
             /* overflow: hidden;  <-- REMOVE THIS */
 
-            white-space: nowrap;
+            /* white-space: nowrap; */
             text-shadow: 0 15px 10px rgba(199, 168, 107, 0.4);
 
             /* The Animation */
-            animation: inkFlow 3s cubic-bezier(0.7, 0, 0.3, 1) forwards;
-            animation-delay: 0.4s;
+        }
 
-            /* FIX 2: Start with negative values on Top/Bottom/Left to allow room for shadow */
-            /* The 100% on the RIGHT is what hides the text initially */
+        h1.names.run-animation {
+            animation: inkFlow 3s cubic-bezier(0.7, 0, 0.3, 1) forwards;
             clip-path: inset(-20px 100% -50px -20px);
         }
 
@@ -197,7 +218,7 @@
         }
 
         .small-caps {
-            font-size: 1.1rem;
+            font-size: clamp(0.8rem, 4.5vw, 1.1rem);
             letter-spacing: 3px;
             text-transform: uppercase;
             color: var(--gold);
@@ -214,7 +235,7 @@
         }
 
         .location-text {
-            font-size: 1.1rem;
+            font-size: clamp(0.8rem, 4.5vw, 1.1rem);
             line-height: 1.8;
             color: #666;
             letter-spacing: 0.5px;
@@ -522,13 +543,25 @@
             width: 100%;
             height: 100%;
             background-color: #fdfbf7;
-            /* Or use your paper texture color */
             z-index: 9999;
-            /* On top of everything */
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: opacity 1s ease, visibility 1s ease;
+
+            /* CHANGE THIS: Start visible */
+            opacity: 1;
+            visibility: visible;
+
+            /* This handles the smooth fade out */
+            transition: opacity 1.5s ease, visibility 1.5s ease;
+        }
+
+        /* Add this class to hide it later */
+        .hidden-overlay {
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none;
+            /* Allows clicking through it while fading */
         }
 
         .welcome-content {
@@ -591,15 +624,19 @@
             color: var(--gold);
             text-transform: uppercase;
             letter-spacing: 2px;
-            font-size: 1rem;
-            cursor: pointer;
+            font-size: 2rem;
+            /* cursor: pointer; */
             transition: 0.3s;
             display: inline-block;
             border-radius: 8px;
             background-color: white;
 
             /* The Animation */
-            animation: pulse-gold 2s infinite;
+
+            animation:
+                slideUpBtn 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards,
+                pulse-gold 2s infinite 1s;
+
             box-shadow: 0 0 0 0 rgba(199, 168, 107, 0.7);
 
             /* --- RESPONSIVE SINGLE LINE FIXES --- */
@@ -616,31 +653,33 @@
             letter-spacing: clamp(1px, 1vw, 2px);
         }
 
-        .enter-btn:hover {
-            background: var(--gold);
-            color: white;
-            animation: pulse-gold 2s infinite;
-            /* Stop pulsing when hovered */
-            transform: scale(1.05);
-            /* Slight grow effect */
-        }
-
         /* Keyframes for the Pulse */
         @keyframes pulse-gold {
             0% {
                 transform: scale(0.95);
                 box-shadow: 0 0 0 0 rgba(199, 168, 107, 0.7);
+
+                /* Start State */
+                background-color: #ffffff;
+                color: var(--gold);
             }
 
             70% {
                 transform: scale(1);
                 box-shadow: 0 0 0 10px rgba(199, 168, 107, 0);
-                /* Ring expands and fades transparent */
+
+                /* Peak State (Inverted) */
+                background-color: var(--gold);
+                color: #ffffff;
             }
 
             100% {
                 transform: scale(0.95);
                 box-shadow: 0 0 0 0 rgba(199, 168, 107, 0);
+
+                /* End State (Back to normal) */
+                background-color: #ffffff;
+                color: var(--gold);
             }
         }
 
@@ -715,8 +754,6 @@
             align-items: center;
             gap: 6px;
             /* Space between text and icon */
-
-            font-size: 1.1rem;
             font-weight: 600;
             color: var(--primary-red);
             text-decoration: none;
@@ -726,6 +763,11 @@
             cursor: pointer;
             transition: color 0.3s ease, transform 0.2s ease;
             animation: bouncePin 0.6s infinite alternate;
+
+            font-size: clamp(0.8rem, 4.5vw, 1.1rem);
+            /* RESPONSIVE LETTER SPACING */
+            /* Spacing also needs to shrink on mobile, or it will break the line */
+            letter-spacing: clamp(0.5px, 1vw, 3px);
         }
 
         /* Hover Effect */
@@ -754,11 +796,17 @@
 
         /* SVG Icon Styling */
         .map-icon {
-            width: 18px;
-            height: 18px;
+            /* RESPONSIVE SIZE */
+            /* 1.1em makes it slightly larger than the text for better visibility */
+            /* It will now auto-scale based on the parent font-size */
+            width: 1.1em;
+            height: 1.1em;
+
             fill: currentColor;
-            /* Inherits the color from the text (Red -> Gold on hover) */
             transition: transform 0.3s ease;
+
+            /* Fix alignment issues on some devices */
+            flex-shrink: 0;
         }
 
         /* Make icon bounce slightly on hover */
