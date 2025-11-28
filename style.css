@@ -22,10 +22,6 @@
             align-items: center;
             min-height: 100vh;
             padding: 20px;
-
-            /* REMOVED background image properties from here */
-            background-color: #000;
-            /* Fallback color */
         }
 
         /* ADD THIS NEW CLASS */
@@ -39,7 +35,6 @@
             background-image: url('images/bg.jpg');
             background-size: cover;
             background-position: center center;
-
             z-index: -10;
             /* Behind everything */
             will-change: transform;
@@ -209,11 +204,11 @@
         }
 
         h1.names span.amp {
+            font-family: 'Engagement', cursive;
             font-size: 1.5rem;
             display: block;
             color: var(--gold);
             margin: 10px 0;
-            font-family: 'Montserrat', sans-serif;
             font-weight: 600;
         }
 
@@ -812,4 +807,36 @@
             100% {
                 transform: translateY(-3px);
             }
+        }
+
+        .countdown {
+            /* --- TYPOGRAPHY --- */
+            font-family: 'Montserrat', sans-serif;
+            /* Changed to match your theme */
+            font-size: 0.9rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+
+            /* --- SHAPE & STYLE --- */
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid #eee;
+            border-radius: 50px;
+            /* Pill shape matches your buttons */
+            padding: 10px 25px;
+
+            /* --- ALIGNMENT & WIDTH (The Fix) --- */
+            display: block;
+            /* Ensures it behaves like a box */
+            margin: 15px auto;
+            /* auto on left/right centers it */
+
+            width: fit-content;
+            /* Grow to fit the text exactly */
+            min-width: 220px;
+            /* But never get smaller than this */
+
+            /* Optional: shadow to make it pop */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
