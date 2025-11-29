@@ -4,7 +4,7 @@
             --gold: #c7a86b;
             --text-dark: #2c2c2c;
             --card-bg: rgba(255, 255, 255, 0.96);
-            --center-flower-img: url('https://static.vecteezy.com/system/resources/thumbnails/057/728/575/small/red-roses-and-ribbon-banner-design-element-png.png');
+            /* --center-flower-img: url('https://static.vecteezy.com/system/resources/thumbnails/057/728/575/small/red-roses-and-ribbon-banner-design-element-png.png'); */
             /* CSS Standard for forcing light mode */
             color-scheme: light;
         }
@@ -33,7 +33,7 @@
             height: 100%;
 
             background-image: url('images/bg.jpg');
-            background-size: cover;
+            background-size: cover!important;
             background-position: center center;
             z-index: -10;
             /* Behind everything */
@@ -44,7 +44,7 @@
             animation: bg-breathe 30s infinite alternate;
         }
 
-        /* Update your existing overlay to sit on top of the bg layer */
+        /* Background Fade */
         body::before {
             /* Only keep the darkness overlay */
             content: '';
