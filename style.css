@@ -92,7 +92,7 @@
             width: 100%;
             height: 100%;
             /*background-image: url('https://template.canva.com/EAGD4XKFrp4/1/0/1131w-K4N-pEdITXY.jpg');*/
-            background-image: url('./images/border2.png');
+            background-image: url('./images/bordere.png');
             background-size: cover;
             background-position: center;
             opacity: 50;
@@ -160,12 +160,12 @@
         .content {
             position: relative;
             z-index: 10;
-            padding: 180px 30px 180px 30px;
+            padding: 150px 30px 150px 30px;
             display: flex;
             flex-direction: column;
             gap: 15px;
             height: 100%;
-            justify-content: flex-start;
+            justify-content: center center;
         }
 
         h1.names {
@@ -235,6 +235,7 @@
             letter-spacing: 0.5px;
             text-transform: uppercase;
             font-weight: 600;
+            margin-top: 1rem;
         }
 
         .location-text {
@@ -250,7 +251,7 @@
             height: 1px;
             width: 120px;
             background: var(--gold);
-            margin: 10px auto;
+            margin: 0px auto 2rem auto;
             opacity: 0.6;
         }
 
@@ -260,7 +261,7 @@
 
         .date {
             font-weight: 700;
-            font-size: clamp(0.8rem, 4.5vw, 1.1rem);
+            font-size: clamp(0.8rem, 4.5vw, 1.2rem);
             text-transform: uppercase;
             color: var(--primary-red);
             letter-spacing: clamp(0.5px, 1vw, 3px);
