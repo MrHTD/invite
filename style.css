@@ -72,8 +72,7 @@
             position: relative;
             background-color: var(--card-bg);
             width: 100%;
-            max-width: 720px;
-            min-height: 850px;
+            max-width: 700px;
             /* Desktop Height */
             box-shadow: 0 10px 90px #d02729;
             overflow: hidden;
@@ -161,7 +160,7 @@
         .content {
             position: relative;
             z-index: 10;
-            padding: 180px 30px 150px 30px;
+            padding: 180px 30px 180px 30px;
             display: flex;
             flex-direction: column;
             gap: 15px;
@@ -251,7 +250,7 @@
             height: 1px;
             width: 120px;
             background: var(--gold);
-            margin: 25px auto;
+            margin: 10px auto;
             opacity: 0.6;
         }
 
@@ -576,7 +575,7 @@
 
             /* RESPONSIVE FONT SIZE */
             /* This scales the text: Min 1.5rem | Preferred 8% of screen | Max 5rem */
-            font-size: clamp(2.5rem, 9vw, 5rem);
+            font-size: clamp(2.5rem, 9vw, 4rem);
             /* ANIMATION: Fades in and moves down slightly */
             opacity: 0;
             /* Start invisible */
@@ -615,7 +614,7 @@
 
         .enter-btn {
             padding: 12px 30px;
-            border: 1px solid var(--gold);
+            /* border: 1px solid var(--gold); */
             color: var(--gold);
             text-transform: uppercase;
             letter-spacing: 2px;
