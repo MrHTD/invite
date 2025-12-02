@@ -126,32 +126,3 @@ window.onload = () => {
         }
     }, 3000);
 };
-
-document.addEventListener('DOMContentLoaded', function () {
-    var music = document.getElementById('weddingSong');
-    music.currentTime = 80;
-    // 1. Try to play immediately (Works on some Desktops/Firefox)
-    var promise = music.play();
-
-    if (promise !== undefined) {
-        promise.catch(error => {
-            // Auto-play was prevented. This is normal on Chrome/Mobile.
-            console.log("Autoplay prevented. Waiting for user interaction.");
-        });
-    }
-
-    // 2. THE TRICK: Play on the very first click/tap anywhere on the site
-    function startMusic() {
-        if (music.paused) {
-            music.play();
-        }            // Remove the listeners so it doesn't try to play again
-        document.removeEventListener('click', startMusic);
-        document.removeEventListener('touchstart', startMusic);
-        document.removeEventListener('scroll', startMusic);
-    }
-
-    // Add listeners to the whole page
-    document.addEventListener('click', startMusic);      // For mouse clicks
-    document.addEventListener('touchstart', startMusic); // For mobile taps
-    document.addEventListener('scroll', startMusic);     // For scrolling
-});
