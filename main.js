@@ -105,24 +105,30 @@ const x = setInterval(function () {
 
 window.addEventListener('resize', resize);
 
-// 6. Master Window Load
-window.onload = () => {
-    // Start animations
-    document.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
+// // 6. Master Window Load
+// window.onload = () => {
+//     // Start animations
 
-    // CALL THESE ONLY HERE (Removed the duplicate calls at the bottom)
-    init();
-    createFireflies();
+//     // CALL THESE ONLY HERE (Removed the duplicate calls at the bottom)
 
-    // Auto-hide Welcome Screen
-    setTimeout(() => {
-        const screen = document.getElementById('welcome-screen');
-        if (screen) {
-            screen.classList.add('hidden-overlay');
-        }
-        const names = document.querySelector('h1.names');
-        if (names) {
-            names.classList.add('run-animation');
-        }
-    }, 3000);
-};
+//     // Auto-hide Welcome Screen
+//     setTimeout(() => {
+//         const screen = document.getElementById('welcome-screen');
+//         if (screen) {
+//             screen.classList.add('hidden-overlay');
+//         }
+//         const names = document.querySelector('h1.names');
+//         if (names) {
+//             names.classList.add('run-animation');
+//         }
+//     }, 3000);
+// };
+
+document.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
+const allNames = document.querySelectorAll('.names, .fname, .amp');
+allNames.forEach((element, index) => {
+    element.classList.add('run-animation');
+});
+
+init();
+createFireflies();
