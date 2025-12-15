@@ -32,7 +32,7 @@
             width: 100%;
             height: 100%;
 
-            background-image: url('images/bg.jpg');
+            background-image: url('images/bgv.jpg');
             background-size: cover !important;
             background-position: center center;
             z-index: -10;
@@ -340,7 +340,7 @@
 
         .firefly {
             position: absolute;
-            background-image: url('https://png.pngtree.com/png-vector/20240130/ourmid/pngtree-romantic-light-pink-rose-flower-ai-generated-png-image_11568979.png');
+            background-image: url('images/pink-rose-flower.png');
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
